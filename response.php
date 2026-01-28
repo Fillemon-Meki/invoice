@@ -135,14 +135,6 @@ if ($action == 'create_customer'){
 	$customer_county = $_POST['customer_county']; // customer county
 	$customer_postcode = $_POST['customer_postcode']; // customer postcode
 	$customer_phone = $_POST['customer_phone']; // customer phone number
-	
-	//shipping
-	$customer_name_ship = $_POST['customer_name_ship']; // customer name (shipping)
-	$customer_address_1_ship = $_POST['customer_address_1_ship']; // customer address (shipping)
-	$customer_address_2_ship = $_POST['customer_address_2_ship']; // customer address (shipping)
-	$customer_town_ship = $_POST['customer_town_ship']; // customer town (shipping)
-	$customer_county_ship = $_POST['customer_county_ship']; // customer county (shipping)
-	$customer_postcode_ship = $_POST['customer_postcode_ship']; // customer postcode (shipping)
 
 	$query = "INSERT INTO store_customers (
 					name,
@@ -152,20 +144,8 @@ if ($action == 'create_customer'){
 					town,
 					county,
 					postcode,
-					phone,
-					name_ship,
-					address_1_ship,
-					address_2_ship,
-					town_ship,
-					county_ship,
-					postcode_ship
+					phone
 				) VALUES (
-					?,
-					?,
-					?,
-					?,
-					?,
-					?,
 					?,
 					?,
 					?,
@@ -185,9 +165,9 @@ if ($action == 'create_customer'){
 
 	/* Bind parameters. TYpes: s = string, i = integer, d = double,  b = blob */
 	$stmt->bind_param(
-		'ssssssssssssss',
+		'ssssssss',
 		$customer_name,$customer_email,$customer_address_1,$customer_address_2,$customer_town,$customer_county,$customer_postcode,
-		$customer_phone,$customer_name_ship,$customer_address_1_ship,$customer_address_2_ship,$customer_town_ship,$customer_county_ship,$customer_postcode_ship);
+		$customer_phone);
 
 	if($stmt->execute()){
 		//if saving success
@@ -222,14 +202,6 @@ if ($action == 'create_invoice'){
 	$customer_county = $_POST['customer_county']; // customer county
 	$customer_postcode = $_POST['customer_postcode']; // customer postcode
 	$customer_phone = $_POST['customer_phone']; // customer phone number
-	
-	//shipping
-	$customer_name_ship = $_POST['customer_name_ship']; // customer name (shipping)
-	$customer_address_1_ship = $_POST['customer_address_1_ship']; // customer address (shipping)
-	$customer_address_2_ship = $_POST['customer_address_2_ship']; // customer address (shipping)
-	$customer_town_ship = $_POST['customer_town_ship']; // customer town (shipping)
-	$customer_county_ship = $_POST['customer_county_ship']; // customer county (shipping)
-	$customer_postcode_ship = $_POST['customer_postcode_ship']; // customer postcode (shipping)
 
 	// invoice details
 	$invoice_number = $_POST['invoice_id']; // invoice number
@@ -238,7 +210,6 @@ if ($action == 'create_invoice'){
 	$custom_email = $_POST['custom_email']; // custom invoice email
 	$invoice_due_date = $_POST['invoice_due_date']; // invoice due date
 	$invoice_subtotal = $_POST['invoice_subtotal']; // invoice sub-total
-	$invoice_shipping = $_POST['invoice_shipping']; // invoice shipping amount
 	$invoice_discount = $_POST['invoice_discount']; // invoice discount
 	$invoice_vat = $_POST['invoice_vat']; // invoice vat
 	$invoice_total = $_POST['invoice_total']; // invoice total
@@ -267,7 +238,6 @@ if ($action == 'create_invoice'){
 					invoice_date, 
 					invoice_due_date, 
 					subtotal, 
-					shipping, 
 					discount, 
 					vat, 
 					total,
@@ -280,7 +250,6 @@ if ($action == 'create_invoice'){
 				  	'".$invoice_date."',
 				  	'".$invoice_due_date."',
 				  	'".$invoice_subtotal."',
-				  	'".$invoice_shipping."',
 				  	'".$invoice_discount."',
 				  	'".$invoice_vat."',
 				  	'".$invoice_total."',
@@ -299,13 +268,7 @@ if ($action == 'create_invoice'){
 					town,
 					county,
 					postcode,
-					phone,
-					name_ship,
-					address_1_ship,
-					address_2_ship,
-					town_ship,
-					county_ship,
-					postcode_ship
+					phone
 				) VALUES (
 					'".$invoice_number."',
 					'".$customer_name."',
@@ -315,13 +278,7 @@ if ($action == 'create_invoice'){
 					'".$customer_town."',
 					'".$customer_county."',
 					'".$customer_postcode."',
-					'".$customer_phone."',
-					'".$customer_name_ship."',
-					'".$customer_address_1_ship."',
-					'".$customer_address_2_ship."',
-					'".$customer_town_ship."',
-					'".$customer_county_ship."',
-					'".$customer_postcode_ship."'
+					'".$customer_phone."'
 				);
 			";
 
@@ -418,9 +375,7 @@ if ($action == 'create_invoice'){
 		if(!empty($invoice_discount)) {
 			$invoice->addTotal("Discount",$invoice_discount);
 		}
-		if(!empty($invoice_shipping)) {
-			$invoice->addTotal("Delivery",$invoice_shipping);
-		}
+		
 		if(ENABLE_VAT == true) {
 			$invoice->addTotal("TAX/VAT ".VAT_RATE."%",$invoice_vat);
 		}
@@ -550,13 +505,12 @@ if($action == 'update_customer') {
 	$customer_postcode = $_POST['customer_postcode']; // customer postcode
 	$customer_phone = $_POST['customer_phone']; // customer phone number
 	
-	//shipping
-	$customer_name_ship = $_POST['customer_name_ship']; // customer name (shipping)
-	$customer_address_1_ship = $_POST['customer_address_1_ship']; // customer address (shipping)
-	$customer_address_2_ship = $_POST['customer_address_2_ship']; // customer address (shipping)
-	$customer_town_ship = $_POST['customer_town_ship']; // customer town (shipping)
-	$customer_county_ship = $_POST['customer_county_ship']; // customer county (shipping)
-	$customer_postcode_ship = $_POST['customer_postcode_ship']; // customer postcode (shipping)
+		
+	
+	
+	
+	
+	
 
 	// the query
 	$query = "UPDATE store_customers SET
@@ -698,14 +652,6 @@ if($action == 'update_invoice') {
 	$customer_county = $_POST['customer_county']; // customer county
 	$customer_postcode = $_POST['customer_postcode']; // customer postcode
 	$customer_phone = $_POST['customer_phone']; // customer phone number
-	
-	//shipping
-	$customer_name_ship = $_POST['customer_name_ship']; // customer name (shipping)
-	$customer_address_1_ship = $_POST['customer_address_1_ship']; // customer address (shipping)
-	$customer_address_2_ship = $_POST['customer_address_2_ship']; // customer address (shipping)
-	$customer_town_ship = $_POST['customer_town_ship']; // customer town (shipping)
-	$customer_county_ship = $_POST['customer_county_ship']; // customer county (shipping)
-	$customer_postcode_ship = $_POST['customer_postcode_ship']; // customer postcode (shipping)
 
 	// invoice details
 	$invoice_number = $_POST['invoice_id']; // invoice number
@@ -713,7 +659,6 @@ if($action == 'update_invoice') {
 	$invoice_date = $_POST['invoice_date']; // invoice date
 	$invoice_due_date = $_POST['invoice_due_date']; // invoice due date
 	$invoice_subtotal = $_POST['invoice_subtotal']; // invoice sub-total
-	$invoice_shipping = $_POST['invoice_shipping']; // invoice shipping amount
 	$invoice_discount = $_POST['invoice_discount']; // invoice discount
 	$invoice_vat = $_POST['invoice_vat']; // invoice vat
 	$invoice_total = $_POST['invoice_total']; // invoice total
@@ -727,7 +672,6 @@ if($action == 'update_invoice') {
 					invoice_date, 
 					invoice_due_date, 
 					subtotal, 
-					shipping, 
 					discount, 
 					vat, 
 					total,
@@ -739,7 +683,6 @@ if($action == 'update_invoice') {
 				  	'".$invoice_date."',
 				  	'".$invoice_due_date."',
 				  	'".$invoice_subtotal."',
-				  	'".$invoice_shipping."',
 				  	'".$invoice_discount."',
 				  	'".$invoice_vat."',
 				  	'".$invoice_total."',
@@ -871,9 +814,7 @@ if($action == 'update_invoice') {
 		if(!empty($invoice_discount)) {
 			$invoice->addTotal("Discount",$invoice_discount);
 		}
-		if(!empty($invoice_shipping)) {
-			$invoice->addTotal("Delivery",$invoice_shipping);
-		}
+		
 		if(ENABLE_VAT == true) {
 			$invoice->addTotal("TAX/VAT ".VAT_RATE."%",$invoice_vat);
 		}
@@ -1285,3 +1226,6 @@ if($action == 'delete_customer') {
 }
 
 ?>
+
+
+

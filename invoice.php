@@ -20,7 +20,6 @@ class invoicr extends FPDF_rotation
 	var $due;
 	var $from;
 	var $to;
-	var $ship; // ADDED SHIPPING
 	var $items;
 	var $totals;
 	var $badge;
@@ -101,11 +100,6 @@ class invoicr extends FPDF_rotation
 	function setTo($data)
 	{
 		$this->to = $data;
-	}
-
-	function shipTo($data)
-	{
-		$this->ship = $data;
 	}
 	
 	function setReference($reference)
@@ -258,32 +252,27 @@ class invoicr extends FPDF_rotation
 			$this->SetTextColor($this->color[0],$this->color[1],$this->color[2]);
 			$this->SetDrawColor($this->color[0],$this->color[1],$this->color[2]);
 			$this->SetFont($this->font,'B',10);
-			$width = ($this->document['w']-$this->margins['l']-$this->margins['r'])/3;
+			$width = ($this->document['w']-$this->margins['l']-$this->margins['r'])/2;
 			if(isset($this->flipflop))
 			{
 				$to = $this->l['to'];
 				$from = $this->l['from'];
-				$ship = $this->l['ship']; // ADDED SHIPPING
 
 				$this->l['to'] = $from;
 				$this->l['from'] = $to;
-				$this->l['ship'] = $from; // ADDED SHIPPING
 
 				$to = $this->to;
 				$from = $this->from;
-				$ship = $this->ship; // ADDED SHIPPING
 
 				$this->to = $from;
 				$this->from = $to;
-				$this->ship = $from; // ADDED SHIPPING
 			}
 			$this->Cell($width,$lineheight,strtoupper($this->l['from']),0,0,'L');
-			$this->Cell($width,$lineheight,strtoupper($this->l['to']),0,0,'L');
-			$this->Cell(0,$lineheight,strtoupper($this->l['ship']),0,0,'L'); // ADDED SHIPPING
+			$this->Cell(0,$lineheight,strtoupper($this->l['to']),0,0,'L');
 			$this->Ln(7);
 			$this->SetLineWidth(0.3);
 			$this->Line($this->margins['l'], $this->GetY(),$this->margins['l']+$width-10, $this->GetY());
-			$this->Line($this->margins['l']+$width, $this->GetY(),$this->margins['l']+$width+$width+$width, $this->GetY());
+			$this->Line($this->margins['l']+$width, $this->GetY(),$this->margins['l']+$width+$width, $this->GetY());
 
 			//Information
 			$this->Ln(5);
@@ -292,17 +281,14 @@ class invoicr extends FPDF_rotation
 			// Fix for PHP 8.2 - ensure arrays are initialized
 			if(!is_array($this->from)) $this->from = array();
 			if(!is_array($this->to)) $this->to = array();
-			if(!is_array($this->ship)) $this->ship = array();
 			$this->Cell($width,$lineheight,isset($this->from[0]) ? $this->from[0] : '',0,0,'L');
-			$this->Cell($width,$lineheight,isset($this->to[0]) ? $this->to[0] : '',0,0,'L');
-			$this->Cell(0,$lineheight,isset($this->ship[0]) ? $this->ship[0] : '',0,0,'L'); // ADDED SHIPPING
+			$this->Cell(0,$lineheight,isset($this->to[0]) ? $this->to[0] : '',0,0,'L');
 			$this->SetFont($this->font,'',8);
 			$this->SetTextColor(100,100,100);
 			$this->Ln(7);
-			for($i=0; $i<max(count($this->from),count($this->to),count($this->ship)); $i++) { // ADDED SHIPPING
+			for($i=0; $i<max(count($this->from),count($this->to)); $i++) {
 				$this->Cell($width,$lineheight,isset($this->from[$i]) ? iconv("UTF-8", "ISO-8859-1",$this->from[$i]) : '',0,0,'L');
-				$this->Cell($width,$lineheight,isset($this->to[$i]) ? iconv("UTF-8", "ISO-8859-1",$this->to[$i]) : '',0,0,'L');
-				$this->Cell(0,$lineheight,isset($this->ship[$i]) ? iconv("UTF-8", "ISO-8859-1",$this->ship[$i]) : '',0,0,'L'); // ADDED SHIPPING
+				$this->Cell(0,$lineheight,isset($this->to[$i]) ? iconv("UTF-8", "ISO-8859-1",$this->to[$i]) : '',0,0,'L');
 				$this->Ln(5);
 			}	
 			$this->Ln(-6);
