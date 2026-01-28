@@ -351,8 +351,6 @@ if ($action == 'create_invoice'){
 		$invoice->setFrom(array(COMPANY_NAME,COMPANY_ADDRESS_1,COMPANY_ADDRESS_2,COMPANY_ADDRESS_3,COMPANY_COUNTY,COMPANY_POSTCODE,COMPANY_NUMBER,COMPANY_VAT));
 		//Set to
 		$invoice->setTo(array($customer_name,$customer_address_1,$customer_address_2,$customer_town,$customer_county,$customer_postcode,$customer_phone));
-		// Ship to
-		$invoice->shipTo(array($customer_name_ship,$customer_address_1_ship,$customer_address_2_ship,$customer_town_ship,$customer_county_ship,$customer_postcode_ship));
 		// add items
 		foreach($_POST['invoice_product'] as $key => $value) {
 		    $item_product = $value;

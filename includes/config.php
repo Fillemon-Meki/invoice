@@ -12,7 +12,7 @@ define('DATABASE_PASS', '');
 define('COMPANY_LOGO', 'images/logo.png');
 define('COMPANY_LOGO_WIDTH', '300');
 define('COMPANY_LOGO_HEIGHT', '90');
-define('COMPANY_NAME','Artiflex');
+define('COMPANY_NAME','Artiflex Engineering CC');
 define('COMPANY_ADDRESS_1','Erf 3918 Bowker Street');
 define('COMPANY_ADDRESS_2','Klein Windhoek');
 define('COMPANY_ADDRESS_3','Windhoek, Namibia');
