@@ -790,7 +790,6 @@ if($action == 'update_invoice') {
 		//Set to
 		$invoice->setTo(array($customer_name,$customer_address_1,$customer_address_2,$customer_town,$customer_county,$customer_postcode,"Phone: ".$customer_phone));
 		//Ship to
-		$invoice->shipTo(array($customer_name_ship,$customer_address_1_ship,$customer_address_2_ship,$customer_town_ship,$customer_county_ship,$customer_postcode_ship,''));
 		//Add items
 		// invoice product items
 		foreach($_POST['invoice_product'] as $key => $value) {
