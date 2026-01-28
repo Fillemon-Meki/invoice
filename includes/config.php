@@ -12,19 +12,19 @@ define('DATABASE_PASS', '');
 define('COMPANY_LOGO', 'images/logo.png');
 define('COMPANY_LOGO_WIDTH', '300');
 define('COMPANY_LOGO_HEIGHT', '90');
-define('COMPANY_NAME','Invoice Mg System');
-define('COMPANY_ADDRESS_1','123 Something Street');
-define('COMPANY_ADDRESS_2','Collierville, 3590 Lords Way');
-define('COMPANY_ADDRESS_3','Paekinta');
-define('COMPANY_COUNTY','US');
-define('COMPANY_POSTCODE','10100');
+define('COMPANY_NAME','Artiflex');
+define('COMPANY_ADDRESS_1','Erf 3918 Bowker Street');
+define('COMPANY_ADDRESS_2','Klein Windhoek');
+define('COMPANY_ADDRESS_3','Windhoek, Namibia');
+define('COMPANY_COUNTY','Namibia');
+define('COMPANY_POSTCODE','P.O Box 91411');
 
-define('COMPANY_NUMBER','Company No: 699400000'); // Company registration number
-define('COMPANY_VAT', 'Company VAT: 690000007'); // Company TAX/VAT number
+define('COMPANY_NUMBER','+264 61 244 786'); // Company phone number
+define('COMPANY_VAT', 'www.artiflex.com.na'); // Company website
 
 // EMAIL DETAILS
-define('EMAIL_FROM', 'sales@inms.ccc'); // Email address invoice emails will be sent from
-define('EMAIL_NAME', 'Invoice Mg System'); // Email from address
+define('EMAIL_FROM', 'info@artiflex.com.na'); // Email address invoice emails will be sent from
+define('EMAIL_NAME', 'Artiflex'); // Email from address
 define('EMAIL_SUBJECT', 'Invoice default email subject'); // Invoice email subject
 define('EMAIL_BODY_INVOICE', 'Invoice default body'); // Invoice email body
 define('EMAIL_BODY_QUOTE', 'Quote default body'); // Invoice email body
