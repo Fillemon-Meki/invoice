@@ -893,7 +893,12 @@ if($action == 'delete_product') {
 // Login to system
 if($action == 'login') {
 
-	// Start session FIRST before any database operations
+	// Set session cookie params BEFORE session_start()
+	if (isset($_POST['remember'])) {	
+		session_set_cookie_params(604800); //one week (value in seconds)
+	}
+	
+	// Start session AFTER setting cookie params
 	session_start();
 
 	header('Content-Type: application/json');
@@ -920,9 +925,8 @@ if($action == 'login') {
 		if($row && isset($row['username'])) {
 			$_SESSION['login_username'] = $row['username'];
 
-			// processing remember me option and setting cookie with long expiry date
+			// Regenerate session ID for security
 			if (isset($_POST['remember'])) {	
-				session_set_cookie_params('604800'); //one week (value in seconds)
 				session_regenerate_id(true);
 			}  
 			
